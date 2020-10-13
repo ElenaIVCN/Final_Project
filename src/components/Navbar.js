@@ -41,10 +41,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar({ handleDrawerToggle }) {
   const classes = useStyles();
-
-  const handleDrawerToggle = () => {};
 
   return (
     <AppBar position='fixed' className={classes.appBar}>

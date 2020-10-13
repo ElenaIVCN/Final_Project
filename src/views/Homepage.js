@@ -29,6 +29,7 @@ export default function Homepage() {
         </Grid>
       </Grid>
       <Route
+        exact
         path='/recipes/details'
         component={() => (
           <RecipeDetails

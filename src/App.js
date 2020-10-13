@@ -35,7 +35,7 @@ const categories = [
   },
 ];
 
-const ResponsiveDrawer = () => {
+const App = () => {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -62,4 +62,4 @@ const ResponsiveDrawer = () => {
   );
 };
 
-export default ResponsiveDrawer;
+export default App;
