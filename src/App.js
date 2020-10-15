@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles } from "@material-ui/core/styles";
+import { Paper } from "@material-ui/core/";
+import {
+  makeStyles,
+  ThemeProvider,
+  createMuiTheme,
+} from "@material-ui/core/styles";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+
 import {
   Fastfood as DinnerIcon,
   EmojiFoodBeverage as BreakfastIcon,
@@ -42,23 +48,33 @@ const App = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  // const [darkMode, setDarkMode] = useState(false);
+  const theme = createMuiTheme({
+    palette: {
+      type: "dark",
+    },
+  });
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <Navbar handleDrawerToggle={handleDrawerToggle} />
-      <Sidebar
-        links={categories}
-        handleDrawerToggle={handleDrawerToggle}
-        mobileOpen={mobileOpen}
-      />
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Router>
-          <Route path='/' component={Homepage} />
-        </Router>
-      </main>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Paper style={{ height: "0vh" }}>
+        <div className={classes.root}>
+          <CssBaseline />
+          <Navbar handleDrawerToggle={handleDrawerToggle} />
+
+          <Sidebar
+            links={categories}
+            handleDrawerToggle={handleDrawerToggle}
+            mobileOpen={mobileOpen}
+          />
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Router>
+              <Route path='/' component={Homepage} />
+            </Router>
+          </main>
+        </div>
+      </Paper>
+    </ThemeProvider>
   );
 };
 

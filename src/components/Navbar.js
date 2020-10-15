@@ -5,6 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+// import AddRecipe from "./AddRecipe";
 
 const drawerWidth = 240;
 
@@ -47,6 +48,7 @@ export default function Navbar({ handleDrawerToggle }) {
   return (
     <AppBar position='fixed' className={classes.appBar}>
       <Toolbar>
+        {/* <AddRecipe /> */}
         <IconButton
           color='inherit'
           aria-label='open drawer'
