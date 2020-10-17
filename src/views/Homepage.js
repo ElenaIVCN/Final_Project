@@ -4,6 +4,7 @@ import RecipePreviewCard from "../components/RecipePreviewCard";
 import { Route, useHistory } from "react-router-dom";
 import RecipeDetails from "./RecipeDetails";
 import AddButton from "../components/AddButton";
+import AddRecipePreviewCard from "../components/AddRecipePreviewCard";
 
 const FloatingActionButtons = () => onclick();
 
@@ -38,6 +39,17 @@ export default function Homepage() {
         path='/recipes/details'
         component={() => (
           <RecipeDetails
+            handleClose={() => {
+              history.push("/");
+            }}
+          />
+        )}
+      />
+            <Route
+        exact
+        path='/add_recipe'
+        component={() => (
+          <AddRecipePreviewCard
             handleClose={() => {
               history.push("/");
             }}
