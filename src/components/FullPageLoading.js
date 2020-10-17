@@ -13,7 +13,7 @@ export default function FullPageLoading() {
     const classes = useStyles();
 
     return (
-        <Backdrop className={classes.root} open="trye">
+        <Backdrop className={classes.root} open={true}>
             <CircularProgress color="inherit" />
         </Backdrop>
     );

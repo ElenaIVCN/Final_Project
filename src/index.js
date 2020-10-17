@@ -19,9 +19,7 @@ const firebaseConfig = {
 ReactDOM.render(
   <FirebaseAppProvider firebaseConfig={firebaseConfig}>
     <Suspense fallback={<FullPageLoading />}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <App />
     </Suspense>
   </FirebaseAppProvider>,
   document.getElementById("root")
