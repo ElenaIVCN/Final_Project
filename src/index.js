@@ -13,8 +13,7 @@ const firebaseConfig = {
     projectId: "always-hungry-665b7",
     storageBucket: "always-hungry-665b7.appspot.com",
     messagingSenderId: "879292276437",
-    appId: "1:879292276437:web:add13cc31b667a6af34c5c"
- };
+    appId: "1:879292276437:web:add13cc31b667a6af34c5c"};
 
 ReactDOM.render(
   <FirebaseAppProvider firebaseConfig={firebaseConfig}>

@@ -20,7 +20,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
             <Link color="inherit" component={RouterLink} to="/">
-                My stupid food frontend
+                Always Hungry
             </Link>{" "}
             {new Date().getFullYear()}
             {"."}
@@ -146,4 +146,3 @@ export default function Login() {
         </Container>
     );
 }
-

@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function RecipePreviewCard() {
+export default function RecipePreviewCard({meal}) {
   const history = useHistory();
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -67,7 +67,7 @@ export default function RecipePreviewCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title='Shrimp and Chorizo Paella'
+        title={ meal.strMeal }
         subheader='September 14, 2016'
       />
       <CardActionArea onClick={openRecipe}>
