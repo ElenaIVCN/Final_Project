@@ -74,6 +74,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const useStyles = makeStyles({
   root: {
@@ -119,21 +121,13 @@ export default function RecipeDetails({ handleClose }) {
   };
 
   return (
-    <Card className={classes.root}
-    onClose={handleClose}
-    open={true}>
-      <CardContent>
+    <Dialog
+      onClose={handleClose}
+      aria-labelledby='simple-dialog-title'
+      open={true}
+    >
+      <DialogTitle id='simple-dialog-title'>{ meal?.strInstructions }</DialogTitle>
 
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Details
-        </Typography>
-            <div>
-              <h1>
-                { meal?.strInstructions }
-              </h1>
-            </div>
-
-      </CardContent>
-    </Card>
+    </Dialog>
   );
 }
