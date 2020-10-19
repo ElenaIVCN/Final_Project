@@ -33,18 +33,17 @@ export default function Homepage() {
             <RecipePreviewCard game={ games[2] }/> */}
             </div>) : ""}
           </Grid>
-        {/*<Grid item>
-          <RecipePreviewCard />
+        <Grid item>
+          {data && data.meals && data.meals.length ?  (<div>
+            <RecipePreviewCard meal= {data.meals[1] }/>
+          </div>): ""}
         </Grid>
         <Grid item>
-          <RecipePreviewCard />
+          {data && data.meals && data.meals.length ?  (<div>
+            <RecipePreviewCard meal= {data.meals[2] }/>
+          </div>): ""}
         </Grid>
-        <Grid item>
-          <RecipePreviewCard />
-        </Grid>
-        <Grid item>
-          <RecipePreviewCard />
-        </Grid> */}
+  
       </Grid>
       <AddButton FloatingActionButtons={FloatingActionButtons} />
 

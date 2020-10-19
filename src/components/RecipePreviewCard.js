@@ -51,17 +51,18 @@ export default function RecipePreviewCard({meal}) {
   };
 
   const openRecipe = () => {
+    console.log(meal.idMeal);
     history.push("/recipes/details");
   };
 
   return (
     <Card className={classes.root}>
       <CardHeader
-        avatar={
-          <Avatar aria-label='recipe' className={classes.avatar}>
-            R
-          </Avatar>
-        }
+        // avatar={
+        //   <Avatar aria-label='recipe' className={classes.avatar}>
+        //     R
+        //   </Avatar>
+        // }
         action={
           <IconButton aria-label='settings'>
             <MoreVertIcon />
@@ -73,8 +74,7 @@ export default function RecipePreviewCard({meal}) {
       <CardActionArea onClick={openRecipe}>
         <CardMedia
           className={classes.media}
-          image='/static/images/cards/paella.jpg'
-          title='Paella dish'
+          image={ meal.strMealThumb }
         />
         <CardContent>
           <Typography variant='body2' color='textSecondary' component='p'>
