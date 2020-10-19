@@ -52,7 +52,7 @@ export default function RecipePreviewCard({meal}) {
 
   const openRecipe = () => {
     console.log(meal.idMeal);
-    history.push("/recipes/details");
+    history.push("/recipes/details/"+meal.idMeal);
   };
 
   return (

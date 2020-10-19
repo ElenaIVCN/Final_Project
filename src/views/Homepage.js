@@ -49,7 +49,7 @@ export default function Homepage() {
 
       <Route
         exact
-        path='/recipes/details'
+        path='/recipes/details/:id'
         component={() => (
           <RecipeDetails
             handleClose={() => {
