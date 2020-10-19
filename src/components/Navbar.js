@@ -19,6 +19,7 @@ import {useFirebaseApp, useUser} from "reactfire";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Link, useHistory } from "react-router-dom";
+import SearchIcon from "./SearchIcon";
 
 
 const drawerWidth = 240;
@@ -119,7 +120,7 @@ export default function Navbar({ handleDrawerToggle }) {
         <Typography variant='h6' noWrap className={classes.title}>
           Always hungry
         </Typography>
-
+        <SearchIcon/>
         {user ? (<><Button
           color="inherit"
           ref={anchorRef}
