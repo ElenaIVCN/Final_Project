@@ -68,7 +68,7 @@ export default function Login() {
                         email: "",
                         password: "",
                     }}
-                    onSubmit={async (values, helpers) => {
+                    onSubmit={async (values, /*helpers*/) => {
                         await firebase
                             .auth()
                             .signInWithEmailAndPassword(
