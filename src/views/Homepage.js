@@ -1,32 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Grid } from '@material-ui/core';
 import RecipePreviewCard from '../components/RecipePreviewCard';
 import { Route, useHistory } from 'react-router-dom';
 import RecipeDetails from './RecipeDetails';
 import AddButton from '../components/AddButton';
 import AddRecipePreviewCard from '../components/AddRecipePreviewCard';
+import { TheContext } from '../features/TheContext';
 
 const FloatingActionButtons = () => onclick();
 
 export default function Homepage() {
     const [data, setData] = useState([]);
     const history = useHistory();
+    const { currentUrl } = useContext(TheContext);
 
     useEffect(() => {
-        fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood')
+        fetch(currentUrl)
             .then((res) => res.json())
             .then(function (data) {
                 console.log(data);
                 setData(data);
             });
-    }, []);
-    useEffect(() => {
-        fetch('http://younnite.com/api/recipes?include=ingredients')
-            .then((res) => res.json())
-            .then(function (data) {
-                console.log(data);
-            });
-    }, []);
+    }, [currentUrl]);
+
     return (
         <>
             <Grid container spacing={2}>

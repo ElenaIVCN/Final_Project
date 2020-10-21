@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,6 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { TheContext } from '../features/TheContext';
 
 const useStyles = makeStyles((theme) => ({
     search: {
@@ -71,7 +72,7 @@ export default function PrimarySearchAppBar() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    //  const [searchString, setSearchString] = useState('');
+    const { setSearchString } = useContext(TheContext);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -94,17 +95,7 @@ export default function PrimarySearchAppBar() {
     };
 
     const handleSearch = (event) => {
-        console.log(event.target.value);
-
-        fetch(
-            'https://www.themealdb.com/api/json/v1/1/search.php?s=' +
-                event.target.value
-        )
-            .then((res) => res.json())
-            .then(function (data) {
-                console.log(data);
-                //          setMeal(data.meals[0]);
-            });
+        setSearchString(event.target.value);
     };
 
     const menuId = 'primary-search-account-menu';
