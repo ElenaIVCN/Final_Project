@@ -150,7 +150,7 @@ export default function RecipeDetails({ handleClose }) {
                                 required
                                 fullWidth
                                 name="short_description"
-                                label="Details"
+                                label="Short Description"
                                 variant="outlined"
                             />
                             <Field
