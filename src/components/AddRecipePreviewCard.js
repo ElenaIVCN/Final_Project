@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
@@ -15,6 +15,7 @@ import UploadImageButton from './UploadImageButton';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { FieldArray, Form, Formik, Field } from 'formik';
+import AuthTokenContext from '../features/AuthTokenContext';
 
 const UploadButtons = () => onclick();
 
@@ -29,6 +30,7 @@ function generate(element) {
 }
 
 export default function RecipeDetails({ handleClose }) {
+    const authToken = useContext(AuthTokenContext);
     const classes = useStyles();
     const [dense, setDense] = React.useState(false);
     const [secondary, setSecondary] = React.useState(false);
@@ -49,10 +51,19 @@ export default function RecipeDetails({ handleClose }) {
                     name: '',
                     ingredients: [''],
                     images: [],
+                    short_description: '',
                     description: '',
                 }}
                 onSubmit={async (values, helpers) => {
-                    console.log(values);
+                    fetch('http://younnite.com/api/recipe', {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${authToken}`,
+                        },
+                        body: JSON.stringify(values),
+                    }).then((res) => {});
                 }}
                 render={({ values }) => {
                     return (
@@ -132,9 +143,26 @@ export default function RecipeDetails({ handleClose }) {
                                     <ListItemText primary="Add ingredients" />
                                 </ListItem>
                             </List>
-                            <Typography variant="h6" className={classes.title}>
-                                Details:
-                            </Typography>
+                            <Field
+                                component={TextField}
+                                multiline
+                                rows={3}
+                                required
+                                fullWidth
+                                name="short_description"
+                                label="Details"
+                                variant="outlined"
+                            />
+                            <Field
+                                component={TextField}
+                                multiline
+                                rows={4}
+                                required
+                                fullWidth
+                                name="description"
+                                label="Details"
+                                variant="outlined"
+                            />
 
                             <Button
                                 type="submit"

@@ -19,45 +19,18 @@ export default function Homepage() {
             .then((res) => res.json())
             .then(function (data) {
                 console.log(data);
-                setData(data);
+                setData(data.data);
             });
     }, [currentUrl]);
 
     return (
         <>
             <Grid container spacing={2}>
-                <Grid item>
-                    {/* { games.map(item => <RecipePreviewCard game={ item } key={ item._id }/>)} */}
-                </Grid>
-                <Grid item>
-                    {data && data.meals && data.meals.length ? (
-                        <div>
-                            <RecipePreviewCard meal={data.meals[0]} />
-                            {/* <RecipePreviewCard game={ games[1] }/>
-            <RecipePreviewCard game={ games[2] }/> */}
-                        </div>
-                    ) : (
-                        ''
-                    )}
-                </Grid>
-                <Grid item>
-                    {data && data.meals && data.meals.length ? (
-                        <div>
-                            <RecipePreviewCard meal={data.meals[1]} />
-                        </div>
-                    ) : (
-                        ''
-                    )}
-                </Grid>
-                <Grid item>
-                    {data && data.meals && data.meals.length ? (
-                        <div>
-                            <RecipePreviewCard meal={data.meals[2]} />
-                        </div>
-                    ) : (
-                        ''
-                    )}
-                </Grid>
+                {data.map((meal) => (
+                    <Grid item key={meal.id}>
+                        <RecipePreviewCard meal={meal} />
+                    </Grid>
+                ))}
             </Grid>
             <AddButton FloatingActionButtons={FloatingActionButtons} />
 

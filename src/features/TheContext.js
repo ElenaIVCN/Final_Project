@@ -13,10 +13,10 @@ function TheContextProvider({ children }) {
     let newUrl;
     if (searchStringCtx.length > 0) {
         newUrl =
-            'https://www.themealdb.com/api/json/v1/1/search.php?s=' +
+            'http://younnite.com/api/recipes?sort=-id&include=ingredients?search=' +
             searchStringCtx;
     } else {
-        newUrl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood';
+        newUrl = 'http://younnite.com/api/recipes?sort=-id&include=ingredients';
     }
 
     if (newUrl != currentUrlCtx) {
