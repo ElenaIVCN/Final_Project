@@ -12,9 +12,7 @@ function TheContextProvider({ children }) {
 
     let newUrl;
     if (searchStringCtx.length > 0) {
-        newUrl =
-            'http://younnite.com/api/recipes?sort=-id&include=ingredients?search=' +
-            searchStringCtx;
+        newUrl = 'http://younnite.com/api/recipes?search=' + searchStringCtx;
     } else {
         newUrl = 'http://younnite.com/api/recipes?sort=-id&include=ingredients';
     }

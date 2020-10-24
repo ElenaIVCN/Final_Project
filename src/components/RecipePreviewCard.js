@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -17,6 +18,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useHistory } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,9 +53,11 @@ export default function RecipePreviewCard({ meal }) {
     };
 
     const openRecipe = () => {
-        console.log(meal.idMeal);
-        history.push('/recipes/details/' + meal.idMeal);
+        console.log(meal.id);
+        history.push('/recipes/details/' + meal.id);
     };
+
+    const { id } = useParams();
 
     return (
         <Card className={classes.root}>

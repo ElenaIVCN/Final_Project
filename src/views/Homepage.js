@@ -5,6 +5,8 @@ import { Route, useHistory } from 'react-router-dom';
 import RecipeDetails from './RecipeDetails';
 import AddButton from '../components/AddButton';
 import AddRecipePreviewCard from '../components/AddRecipePreviewCard';
+import EditRecipe from '../components/EditRecipe';
+import DeleteRecipe from '../components/DeleteRecipe';
 import { TheContext } from '../features/TheContext';
 
 const FloatingActionButtons = () => onclick();
@@ -33,7 +35,17 @@ export default function Homepage() {
                 ))}
             </Grid>
             <AddButton FloatingActionButtons={FloatingActionButtons} />
-
+            <Route
+                exact
+                path="/edit_recipe/:id"
+                component={() => (
+                    <EditRecipe
+                        handleClose={() => {
+                            history.push('/');
+                        }}
+                    />
+                )}
+            />
             <Route
                 exact
                 path="/recipes/details/:id"
@@ -50,6 +62,17 @@ export default function Homepage() {
                 path="/add_recipe"
                 component={() => (
                     <AddRecipePreviewCard
+                        handleClose={() => {
+                            history.push('/');
+                        }}
+                    />
+                )}
+            />
+            <Route
+                exact
+                path="/delete_recipe/:id"
+                component={() => (
+                    <DeleteRecipe
                         handleClose={() => {
                             history.push('/');
                         }}

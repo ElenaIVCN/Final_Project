@@ -19,22 +19,17 @@ const categories = [
         icon: <BreakfastIcon />,
     },
     {
-        url: '/category/dinner',
+        url: '/category/smoothies',
         name: 'Smoothies',
         icon: <DinnerIcon />,
     },
     {
-        url: '/category/lunch',
+        url: '/category/appetizers',
         name: 'Appetizers',
         icon: <LunchIcon />,
     },
     {
-        url: '/category/lunch',
-        name: 'Brunch',
-        icon: <LunchIcon />,
-    },
-    {
-        url: '/category/lunch',
+        url: '/category/brunch',
         name: 'Brunch',
         icon: <LunchIcon />,
     },
@@ -43,23 +38,24 @@ const categories = [
         name: 'Lunch',
         icon: <LunchIcon />,
     },
+
     {
-        url: '/category/lunch',
+        url: '/category/salads',
         name: 'Salads',
         icon: <LunchIcon />,
     },
     {
-        url: '/category/lunch',
+        url: '/category/soups',
         name: 'Soups',
         icon: <LunchIcon />,
     },
     {
-        url: '/category/lunch',
+        url: '/category/dinner',
         name: 'Dinner',
         icon: <LunchIcon />,
     },
     {
-        url: '/category/lunch',
+        url: '/category/desserts',
         name: 'Desserts',
         icon: <LunchIcon />,
     },

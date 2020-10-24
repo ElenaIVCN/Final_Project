@@ -29,7 +29,7 @@ function generate(element) {
     );
 }
 
-export default function RecipeDetails({ handleClose }) {
+export default function AddRecipePreviewCard({ handleClose }) {
     const authToken = useContext(AuthTokenContext);
     const classes = useStyles();
     const [dense, setDense] = React.useState(false);
