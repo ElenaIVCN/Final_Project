@@ -20,12 +20,47 @@ const categories = [
     },
     {
         url: '/category/dinner',
-        name: 'Dinner',
+        name: 'Smoothies',
         icon: <DinnerIcon />,
     },
     {
         url: '/category/lunch',
+        name: 'Appetizers',
+        icon: <LunchIcon />,
+    },
+    {
+        url: '/category/lunch',
+        name: 'Brunch',
+        icon: <LunchIcon />,
+    },
+    {
+        url: '/category/lunch',
+        name: 'Brunch',
+        icon: <LunchIcon />,
+    },
+    {
+        url: '/category/lunch',
         name: 'Lunch',
+        icon: <LunchIcon />,
+    },
+    {
+        url: '/category/lunch',
+        name: 'Salads',
+        icon: <LunchIcon />,
+    },
+    {
+        url: '/category/lunch',
+        name: 'Soups',
+        icon: <LunchIcon />,
+    },
+    {
+        url: '/category/lunch',
+        name: 'Dinner',
+        icon: <LunchIcon />,
+    },
+    {
+        url: '/category/lunch',
+        name: 'Desserts',
         icon: <LunchIcon />,
     },
 ];
