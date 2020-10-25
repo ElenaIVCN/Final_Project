@@ -28,11 +28,16 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { FieldArray, Form, Formik, Field } from 'formik';
 import AuthTokenContext from '../features/AuthTokenContext';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import InputLabel from '@material-ui/core/InputLabel';
+import Icon from '@material-ui/core/Icon';
 
 const UploadButtons = () => onclick();
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 const useStyles = makeStyles({});
+
 function generate(element) {
     return [0, 1, 2].map((value) =>
         React.cloneElement(element, {
