@@ -1,41 +1,20 @@
 import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Avatar from '@material-ui/core/Avatar';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import AddIcon from '@material-ui/icons/Add';
 import { TextField } from 'formik-material-ui';
 import { TextField as MUITextField } from '@material-ui/core';
-import UploadImageButton from './UploadImageButton';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { FieldArray, Form, Formik, Field } from 'formik';
 import AuthTokenContext from '../features/AuthTokenContext';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import InputLabel from '@material-ui/core/InputLabel';
-import Icon from '@material-ui/core/Icon';
 
 const UploadButtons = () => onclick();
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
+const ingredients = ['username@gmail.com', 'user02@gmail.com'];
 const useStyles = makeStyles({});
 
 function generate(element) {
@@ -136,32 +115,34 @@ export default function AddRecipePreviewCard({ handleClose }) {
                                                                 TextField
                                                             }
                                                             required
-                                                            fullWidth
                                                             name={`ingredients[${index}]`}
                                                             label="Add ingredients"
                                                         />
                                                     )
                                                 )}
+
                                                 <Button
                                                     onClick={() =>
                                                         arrayHelpers.insert('')
                                                     }
                                                     variant="contained"
                                                 >
-                                                    Add Ingredients
+                                                    +
                                                 </Button>
                                             </div>
                                         )}
                                     ></FieldArray>
 
                                     <List>
-                                        {emails.map((email) => (
+                                        {ingredients.map((ingredient) => (
                                             <ListItem
                                                 button
                                                 onClick={() =>
-                                                    handleListItemClick(email)
+                                                    handleListItemClick(
+                                                        ingredient
+                                                    )
                                                 }
-                                                key={email}
+                                                key={ingredient}
                                             ></ListItem>
                                         ))}
 
@@ -175,34 +156,38 @@ export default function AddRecipePreviewCard({ handleClose }) {
                                             }
                                         ></ListItem>
                                     </List>
-                                    <Field
-                                        component={TextField}
-                                        multiline
-                                        rows={3}
-                                        required
-                                        fullWidth
-                                        name="short_description"
-                                        label="Short Description"
-                                        variant="outlined"
-                                    />
-                                    <Field
-                                        component={TextField}
-                                        multiline
-                                        rows={4}
-                                        required
-                                        fullWidth
-                                        name="description"
-                                        label="Details"
-                                        variant="outlined"
-                                    />
-
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        color="primary"
-                                    >
-                                        Submit
-                                    </Button>
+                                    <Grid item xs={12}>
+                                        <Field
+                                            component={TextField}
+                                            multiline
+                                            rows={2}
+                                            required
+                                            name="short_description"
+                                            label="Short Description"
+                                            variant="outlined"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Field
+                                            component={TextField}
+                                            multiline
+                                            rows={4}
+                                            required
+                                            name="description"
+                                            label="Details"
+                                            variant="outlined"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                            size="small"
+                                        >
+                                            Submit
+                                        </Button>
+                                    </Grid>
                                 </Grid>
                             </Form>
                         );
