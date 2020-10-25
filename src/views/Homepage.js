@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Grid } from '@material-ui/core';
 import RecipePreviewCard from '../components/RecipePreviewCard';
 import { Route, useHistory } from 'react-router-dom';
-import RecipeDetails from './RecipeDetails';
+import RecipeDetails from '../components/RecipeDetails';
 import AddButton from '../components/AddButton';
 import AddRecipePreviewCard from '../components/AddRecipePreviewCard';
 import EditRecipe from '../components/EditRecipe';

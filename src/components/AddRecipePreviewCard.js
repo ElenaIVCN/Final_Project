@@ -1,16 +1,28 @@
 import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import Avatar from '@material-ui/core/Avatar';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import { red } from '@material-ui/core/colors';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
-import { blue } from '@material-ui/core/colors';
 import { TextField } from 'formik-material-ui';
+import { TextField as MUITextField } from '@material-ui/core';
 import UploadImageButton from './UploadImageButton';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -34,6 +46,11 @@ export default function AddRecipePreviewCard({ handleClose }) {
     const classes = useStyles();
     const [dense, setDense] = React.useState(false);
     const [secondary, setSecondary] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    };
 
     const handleListItemClick = () => {
         handleClose();
@@ -45,7 +62,8 @@ export default function AddRecipePreviewCard({ handleClose }) {
             aria-labelledby="simple-dialog-title"
             open={true}
         >
-            <DialogTitle id="simple-dialog-title">Add Recipe</DialogTitle>
+            <DialogTitle id="simple-dialog-title">Add your Recipe</DialogTitle>
+
             <Formik
                 initialValues={{
                     name: '',
@@ -65,7 +83,20 @@ export default function AddRecipePreviewCard({ handleClose }) {
                         body: JSON.stringify(values),
                     }).then((res) => {});
                 }}
-                render={({ values }) => {
+                render={({ values, setFieldValue }) => {
+                    const onSelectImage = (ev) => {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            setFieldValue('images', [
+                                ...values.images,
+                                e.target.result,
+                            ]);
+                        };
+
+                        reader.readAsDataURL(ev.target.files[0]);
+                        return ev.target.files[0];
+                    };
                     return (
                         <Form>
                             <Field
@@ -75,14 +106,16 @@ export default function AddRecipePreviewCard({ handleClose }) {
                                 name="name"
                                 label="Recipe Title"
                             />
-                            <UploadImageButton
+                            <MUITextField
                                 multiple
-                                UploadButtons={UploadButtons}
+                                type="file"
+                                name="images"
+                                onChange={onSelectImage}
                             />
-                            <Typography variant="h6" className={classes.title}>
-                                Ingredients
-                            </Typography>
+                            <br></br>
+                            <div> Ingredients </div>
                             <FieldArray
+                                Ingredients
                                 name="ingredients"
                                 render={(arrayHelpers) => (
                                     <div>
@@ -118,14 +151,7 @@ export default function AddRecipePreviewCard({ handleClose }) {
                                             handleListItemClick(email)
                                         }
                                         key={email}
-                                    >
-                                        {/* <ListItemAvatar> */}
-                                        {/* <Avatar className={classes.avatar}>
-                <PersonIcon />
-              </Avatar> */}
-                                        {/* </ListItemAvatar>
-            <ListItemText primary={email} /> */}
-                                    </ListItem>
+                                    ></ListItem>
                                 ))}
 
                                 <ListItem
@@ -134,14 +160,7 @@ export default function AddRecipePreviewCard({ handleClose }) {
                                     onClick={() =>
                                         handleListItemClick('addIngredient')
                                     }
-                                >
-                                    <ListItemAvatar>
-                                        <Avatar>
-                                            <AddIcon />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary="Add ingredients" />
-                                </ListItem>
+                                ></ListItem>
                             </List>
                             <Field
                                 component={TextField}

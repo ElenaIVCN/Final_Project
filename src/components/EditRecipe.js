@@ -1,25 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import PersonIcon from '@material-ui/icons/Person';
-import AddIcon from '@material-ui/icons/Add';
-import { blue } from '@material-ui/core/colors';
 import { TextField } from 'formik-material-ui';
-import UploadImageButton from './UploadImageButton';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { FieldArray, Form, Formik, Field } from 'formik';
 import AuthTokenContext from '../features/AuthTokenContext';
 import { Link, useParams } from 'react-router-dom';
-import RecipeDetails from '../views/RecipeDetails';
 import { useHistory } from 'react-router-dom';
-import { database } from 'firebase';
 
 const UploadButtons = () => onclick();
 
