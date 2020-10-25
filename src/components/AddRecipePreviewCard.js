@@ -68,137 +68,147 @@ export default function AddRecipePreviewCard({ handleClose }) {
             open={true}
         >
             <DialogTitle id="simple-dialog-title">Add your Recipe</DialogTitle>
+            <Box p={2}>
+                <Formik
+                    initialValues={{
+                        name: '',
+                        ingredients: [''],
+                        images: [],
+                        short_description: '',
+                        description: '',
+                    }}
+                    onSubmit={async (values, helpers) => {
+                        fetch('http://younnite.com/api/recipe', {
+                            method: 'POST',
+                            headers: {
+                                Accept: 'application/json',
+                                'Content-Type': 'application/json',
+                                Authorization: `Bearer ${authToken}`,
+                            },
+                            body: JSON.stringify(values),
+                        }).then((res) => {});
+                    }}
+                    render={({ values, setFieldValue }) => {
+                        const onSelectImage = (ev) => {
+                            const reader = new FileReader();
 
-            <Formik
-                initialValues={{
-                    name: '',
-                    ingredients: [''],
-                    images: [],
-                    short_description: '',
-                    description: '',
-                }}
-                onSubmit={async (values, helpers) => {
-                    fetch('http://younnite.com/api/recipe', {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${authToken}`,
-                        },
-                        body: JSON.stringify(values),
-                    }).then((res) => {});
-                }}
-                render={({ values, setFieldValue }) => {
-                    const onSelectImage = (ev) => {
-                        const reader = new FileReader();
+                            reader.onload = function (e) {
+                                setFieldValue('images', [
+                                    ...values.images,
+                                    e.target.result,
+                                ]);
+                            };
 
-                        reader.onload = function (e) {
-                            setFieldValue('images', [
-                                ...values.images,
-                                e.target.result,
-                            ]);
+                            reader.readAsDataURL(ev.target.files[0]);
+                            return ev.target.files[0];
                         };
+                        return (
+                            <Form>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12}>
+                                        <Field
+                                            component={TextField}
+                                            required
+                                            name="name"
+                                            label="Recipe Title"
+                                        />
+                                    </Grid>
 
-                        reader.readAsDataURL(ev.target.files[0]);
-                        return ev.target.files[0];
-                    };
-                    return (
-                        <Form>
-                            <Field
-                                component={TextField}
-                                required
-                                fullWidth
-                                name="name"
-                                label="Recipe Title"
-                            />
-                            <MUITextField
-                                multiple
-                                type="file"
-                                name="images"
-                                onChange={onSelectImage}
-                            />
-                            <br></br>
-                            <div> Ingredients </div>
-                            <FieldArray
-                                Ingredients
-                                name="ingredients"
-                                render={(arrayHelpers) => (
-                                    <div>
-                                        {values.ingredients.map(
-                                            (ingredient, index) => (
-                                                <Field
-                                                    key={index}
-                                                    component={TextField}
-                                                    required
-                                                    fullWidth
-                                                    name={`ingredients[${index}]`}
-                                                    label="Add ingredients"
-                                                />
-                                            )
+                                    <Grid item xs={12}>
+                                        <MUITextField
+                                            multiple
+                                            type="file"
+                                            name="images"
+                                            onChange={onSelectImage}
+                                        />
+                                    </Grid>
+
+                                    <FieldArray
+                                        Ingredients
+                                        name="ingredients"
+                                        render={(arrayHelpers) => (
+                                            <div>
+                                                {values.ingredients.map(
+                                                    (ingredient, index) => (
+                                                        <Field
+                                                            key={index}
+                                                            component={
+                                                                TextField
+                                                            }
+                                                            required
+                                                            fullWidth
+                                                            name={`ingredients[${index}]`}
+                                                            label="Add ingredients"
+                                                        />
+                                                    )
+                                                )}
+                                                <Button
+                                                    onClick={() =>
+                                                        arrayHelpers.insert('')
+                                                    }
+                                                    variant="contained"
+                                                >
+                                                    Add Ingredients
+                                                </Button>
+                                            </div>
                                         )}
-                                        <Button
+                                    ></FieldArray>
+
+                                    <List>
+                                        {emails.map((email) => (
+                                            <ListItem
+                                                button
+                                                onClick={() =>
+                                                    handleListItemClick(email)
+                                                }
+                                                key={email}
+                                            ></ListItem>
+                                        ))}
+
+                                        <ListItem
+                                            autoFocus
+                                            button
                                             onClick={() =>
-                                                arrayHelpers.insert('')
+                                                handleListItemClick(
+                                                    'addIngredient'
+                                                )
                                             }
-                                            variant="contained"
-                                        >
-                                            Add Ingredients
-                                        </Button>
-                                    </div>
-                                )}
-                            ></FieldArray>
+                                        ></ListItem>
+                                    </List>
+                                    <Field
+                                        component={TextField}
+                                        multiline
+                                        rows={3}
+                                        required
+                                        fullWidth
+                                        name="short_description"
+                                        label="Short Description"
+                                        variant="outlined"
+                                    />
+                                    <Field
+                                        component={TextField}
+                                        multiline
+                                        rows={4}
+                                        required
+                                        fullWidth
+                                        name="description"
+                                        label="Details"
+                                        variant="outlined"
+                                    />
 
-                            <List>
-                                {emails.map((email) => (
-                                    <ListItem
-                                        button
-                                        onClick={() =>
-                                            handleListItemClick(email)
-                                        }
-                                        key={email}
-                                    ></ListItem>
-                                ))}
-
-                                <ListItem
-                                    autoFocus
-                                    button
-                                    onClick={() =>
-                                        handleListItemClick('addIngredient')
-                                    }
-                                ></ListItem>
-                            </List>
-                            <Field
-                                component={TextField}
-                                multiline
-                                rows={3}
-                                required
-                                fullWidth
-                                name="short_description"
-                                label="Short Description"
-                                variant="outlined"
-                            />
-                            <Field
-                                component={TextField}
-                                multiline
-                                rows={4}
-                                required
-                                fullWidth
-                                name="description"
-                                label="Details"
-                                variant="outlined"
-                            />
-
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                            >
-                                Submit
-                            </Button>
-                        </Form>
-                    );
-                }}
-            ></Formik>
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        color="primary"
+                                    >
+                                        Submit
+                                    </Button>
+                                </Grid>
+                            </Form>
+                        );
+                    }}
+                ></Formik>
+            </Box>
         </Dialog>
     );
 }
