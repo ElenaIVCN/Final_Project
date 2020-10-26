@@ -29,7 +29,7 @@ export default function Homepage() {
         <>
             <Grid container spacing={2}>
                 {data.map((meal) => (
-                    <Grid item key={meal.id}>
+                    <Grid item key={meal.id} xs={12} sm={3}>
                         <RecipePreviewCard meal={meal} />
                     </Grid>
                 ))}

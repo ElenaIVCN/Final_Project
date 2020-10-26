@@ -5,7 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import { TextField } from 'formik-material-ui';
-import { TextField as MUITextField } from '@material-ui/core';
+import { DialogContent, TextField as MUITextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { FieldArray, Form, Formik, Field } from 'formik';
 import AuthTokenContext from '../features/AuthTokenContext';
@@ -47,7 +47,7 @@ export default function AddRecipePreviewCard({ handleClose }) {
             open={true}
         >
             <DialogTitle id="simple-dialog-title">Add your Recipe</DialogTitle>
-            <Box p={2}>
+            <DialogContent>
                 <Formik
                     initialValues={{
                         name: '',
@@ -87,6 +87,7 @@ export default function AddRecipePreviewCard({ handleClose }) {
                                     <Grid item xs={12}>
                                         <Field
                                             component={TextField}
+                                            fullWidth
                                             required
                                             name="name"
                                             label="Recipe Title"
@@ -101,66 +102,48 @@ export default function AddRecipePreviewCard({ handleClose }) {
                                             onChange={onSelectImage}
                                         />
                                     </Grid>
+                                    <Grid item xs={12}>
+                                        <FieldArray
+                                            Ingredients
+                                            name="ingredients"
+                                            render={(arrayHelpers) => (
+                                                <div>
+                                                    {values.ingredients.map(
+                                                        (ingredient, index) => (
+                                                            <Field
+                                                                fullWidth
+                                                                key={index}
+                                                                component={
+                                                                    TextField
+                                                                }
+                                                                required
+                                                                name={`ingredients[${index}]`}
+                                                                label="Add ingredients"
+                                                            />
+                                                        )
+                                                    )}
 
-                                    <FieldArray
-                                        Ingredients
-                                        name="ingredients"
-                                        render={(arrayHelpers) => (
-                                            <div>
-                                                {values.ingredients.map(
-                                                    (ingredient, index) => (
-                                                        <Field
-                                                            key={index}
-                                                            component={
-                                                                TextField
-                                                            }
-                                                            required
-                                                            name={`ingredients[${index}]`}
-                                                            label="Add ingredients"
-                                                        />
-                                                    )
-                                                )}
+                                                    <Button
+                                                        onClick={() =>
+                                                            arrayHelpers.insert(
+                                                                ''
+                                                            )
+                                                        }
+                                                        variant="contained"
+                                                    >
+                                                        +
+                                                    </Button>
+                                                </div>
+                                            )}
+                                        ></FieldArray>
+                                    </Grid>
 
-                                                <Button
-                                                    onClick={() =>
-                                                        arrayHelpers.insert('')
-                                                    }
-                                                    variant="contained"
-                                                >
-                                                    +
-                                                </Button>
-                                            </div>
-                                        )}
-                                    ></FieldArray>
-
-                                    <List>
-                                        {ingredients.map((ingredient) => (
-                                            <ListItem
-                                                button
-                                                onClick={() =>
-                                                    handleListItemClick(
-                                                        ingredient
-                                                    )
-                                                }
-                                                key={ingredient}
-                                            ></ListItem>
-                                        ))}
-
-                                        <ListItem
-                                            autoFocus
-                                            button
-                                            onClick={() =>
-                                                handleListItemClick(
-                                                    'addIngredient'
-                                                )
-                                            }
-                                        ></ListItem>
-                                    </List>
                                     <Grid item xs={12}>
                                         <Field
                                             component={TextField}
                                             multiline
                                             rows={2}
+                                            fullwidth
                                             required
                                             name="short_description"
                                             label="Short Description"
@@ -193,7 +176,7 @@ export default function AddRecipePreviewCard({ handleClose }) {
                         );
                     }}
                 ></Formik>
-            </Box>
+            </DialogContent>
         </Dialog>
     );
 }

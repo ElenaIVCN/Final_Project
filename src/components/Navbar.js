@@ -21,7 +21,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link, useHistory } from 'react-router-dom';
 import SearchIcon from './SearchIcon';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
     root: {
