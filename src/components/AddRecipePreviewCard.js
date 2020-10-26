@@ -143,7 +143,7 @@ export default function AddRecipePreviewCard({ handleClose }) {
                                             component={TextField}
                                             multiline
                                             rows={2}
-                                            fullwidth
+                                            fullWidth
                                             required
                                             name="short_description"
                                             label="Short Description"
@@ -153,6 +153,7 @@ export default function AddRecipePreviewCard({ handleClose }) {
                                     <Grid item xs={12}>
                                         <Field
                                             component={TextField}
+                                            fullWidth
                                             multiline
                                             rows={4}
                                             required

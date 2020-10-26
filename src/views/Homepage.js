@@ -5,7 +5,7 @@ import { Route, useHistory } from 'react-router-dom';
 import RecipeDetails from '../components/RecipeDetails';
 import AddButton from '../components/AddButton';
 import AddRecipePreviewCard from '../components/AddRecipePreviewCard';
-import EditRecipe from '../components/EditRecipe';
+import EditRecipe from '../components/AddRecipePreviewCard';
 import DeleteRecipe from '../components/DeleteRecipe';
 import { TheContext } from '../features/TheContext';
 
