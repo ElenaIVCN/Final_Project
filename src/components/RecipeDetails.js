@@ -13,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import { FieldArray, Form, Formik, Field } from 'formik';
 import AuthTokenContext from '../features/AuthTokenContext';
 import Box from '@material-ui/core/Box';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 const UploadButtons = () => onclick();
 
@@ -59,153 +61,43 @@ export default function RecipeDetails({ handleClose }) {
     return (
         <Dialog
             onClose={handleClose}
-            aria-labelledby="simple-dialog-title"
+            aria-labelledby="alert-dialog-title"
             open={true}
         >
-            <DialogTitle id="simple-dialog-title">Show Recipe</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{meal?.name}</DialogTitle>
             <DialogContent>
-                {console.log(meal)}
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <DialogContentText id="alert-dialog-description">
+                            {meal?.short_description}
+                        </DialogContentText>
+                    </Grid>
 
-                <Formik
-                    enableReinitialize
-                    initialValues={{
-                        name: meal?.name,
-                        ingredients: [''],
-                        images: [],
-                        short_description: '',
-                        description: '',
-                    }}
-                    // onSubmit={async (values, helpers) => {
-                    //     fetch('http://younnite.com/api/recipe', {
-                    //         method: 'POST',
-                    //         headers: {
-                    //             Accept: 'application/json',
-                    //             'Content-Type': 'application/json',
-                    //             Authorization: `Bearer ${authToken}`,
-                    //         },
-                    //         body: JSON.stringify(values),
-                    //     }).then((res) => {});
-                    // }}
-                    render={({ values, setFieldValue }) => {
-                        const onSelectImage = (ev) => {
-                            const reader = new FileReader();
-
-                            reader.onload = function (e) {
-                                setFieldValue('images', [
-                                    ...values.images,
-                                    e.target.result,
-                                ]);
-                            };
-
-                            reader.readAsDataURL(ev.target.files[0]);
-                            return ev.target.files[0];
-                        };
-                        return (
-                            <Form>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12}>
-                                        <Field
-                                            component={TextField}
-                                            fullWidth
-                                            required
-                                            name="name"
-                                            label="Recipe Title"
-                                        />
-                                    </Grid>
-
-                                    <Grid item xs={12}>
-                                        <MUITextField
-                                            multiple
-                                            type="file"
-                                            name="images"
-                                            onChange={onSelectImage}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <FieldArray
-                                            Ingredients
-                                            name="ingredients"
-                                            render={(arrayHelpers) => (
-                                                <div>
-                                                    {values.ingredients.map(
-                                                        (ingredient, index) => (
-                                                            <Field
-                                                                fullWidth
-                                                                key={index}
-                                                                component={
-                                                                    TextField
-                                                                }
-                                                                required
-                                                                name={`ingredients[${index}]`}
-                                                                label="Add ingredients"
-                                                            />
-                                                        )
-                                                    )}
-
-                                                    <Button
-                                                        onClick={() =>
-                                                            arrayHelpers.insert(
-                                                                ''
-                                                            )
-                                                        }
-                                                        variant="contained"
-                                                    >
-                                                        +
-                                                    </Button>
-                                                </div>
-                                            )}
-                                        ></FieldArray>
-                                    </Grid>
-
-                                    <Grid item xs={12}>
-                                        <Field
-                                            component={TextField}
-                                            multiline
-                                            rows={2}
-                                            fullWidth
-                                            required
-                                            name="short_description"
-                                            label="Short Description"
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Field
-                                            component={TextField}
-                                            fullWidth
-                                            multiline
-                                            rows={4}
-                                            required
-                                            name="description"
-                                            label="Details"
-                                            variant="outlined"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Link>
-                                            <Button
-                                                component={Link}
-                                                color="inherit"
-                                                to={'/edit_recipe/' + id}
-                                            >
-                                                Edit Recipe
-                                            </Button>
-                                        </Link>
-                                        <Link>
-                                            <Button
-                                                component={Link}
-                                                color="inherit"
-                                                to={'/delete_recipe/' + id}
-                                            >
-                                                Delete Recipe
-                                            </Button>
-                                        </Link>
-                                    </Grid>
-                                </Grid>
-                            </Form>
-                        );
-                    }}
-                ></Formik>
+                    <Grid item xs={12}>
+                        {meal?.description}
+                    </Grid>
+                    <Grid item xs={12}></Grid>
+                    <Grid item xs={12}>
+                        <Link>
+                            <Button
+                                component={Link}
+                                color="primary"
+                                to={'/edit_recipe/' + id}
+                            >
+                                Edit Recipe
+                            </Button>
+                        </Link>
+                        <Link>
+                            <Button
+                                component={Link}
+                                color="primary"
+                                to={'/delete_recipe/' + id}
+                            >
+                                Delete Recipe
+                            </Button>
+                        </Link>
+                    </Grid>
+                </Grid>
             </DialogContent>
         </Dialog>
     );
