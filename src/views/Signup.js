@@ -1,28 +1,28 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import { TextField } from "formik-material-ui";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { Link as RouterLink, Redirect } from "react-router-dom";
-import { Field, Formik, Form } from "formik";
-import { useFirebaseApp, useUser } from "reactfire";
-import "firebase/auth";
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import { TextField } from 'formik-material-ui';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { Field, Formik, Form } from 'formik';
+import { useFirebaseApp, useUser } from 'reactfire';
+import 'firebase/auth';
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {"Copyright © "}
+            {'Copyright © '}
             <Link color="inherit" component={RouterLink} to="/">
                 Always hungry
-            </Link>{" "}
+            </Link>{' '}
             {new Date().getFullYear()}
-            {"."}
+            {'.'}
         </Typography>
     );
 }
@@ -30,16 +30,16 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     avatar: {
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: "100%", // Fix IE 11 issue.
+        width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(3),
     },
     submit: {
@@ -64,11 +64,11 @@ export default function SignUp() {
                 </Typography>
                 <Formik
                     initialValues={{
-                        fullName: "",
-                        email: "",
-                        password: "",
+                        fullName: '',
+                        email: '',
+                        password: '',
                     }}
-                    onSubmit={async (values, /*helpers*/) => {
+                    onSubmit={async (values /*helpers*/) => {
                         await firebase
                             .auth()
                             .createUserWithEmailAndPassword(
@@ -77,7 +77,7 @@ export default function SignUp() {
                             )
                             .then((result) => {
                                 result.user.updateProfile({
-                                    displayName: values.fullName
+                                    displayName: values.fullName,
                                 });
                             })
                             .catch((error) => {});

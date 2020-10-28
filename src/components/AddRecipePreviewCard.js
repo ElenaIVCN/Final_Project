@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, useParams } from 'react-router-dom';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import { TextField } from 'formik-material-ui';
@@ -51,12 +49,16 @@ export default function AddRecipePreviewCard({ handleClose }) {
     const loading = autocompleteOpen && categories.length === 0;
 
     useEffect(() => {
-        fetch('http://younnite.com/api/recipe/' + id + '?include=ingredients')
-            .then((res) => res.json())
-            .then(function (data) {
-                console.log(data);
-                setMeal(data.data);
-            });
+        if (id != null) {
+            fetch(
+                'http://younnite.com/api/recipe/' + id + '?include=ingredients'
+            )
+                .then((res) => res.json())
+                .then(function (data) {
+                    console.log(data);
+                    setMeal(data.data);
+                });
+        }
     }, []);
 
     useEffect(() => {
@@ -72,15 +74,13 @@ export default function AddRecipePreviewCard({ handleClose }) {
             return undefined;
         }
 
-        (async () => {
-            await fetch('http://younnite.com/api/categories')
-                .then((res) => res.json())
-                .then((response) => {
-                    if (active) {
-                        setCategories(response.data);
-                    }
-                });
-        })();
+        fetch('http://younnite.com/api/categories')
+            .then((res) => res.json())
+            .then((response) => {
+                if (active) {
+                    setCategories(response.data);
+                }
+            });
 
         return () => {
             active = false;

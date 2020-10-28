@@ -2,18 +2,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import CardContent from '@material-ui/core/CardContent';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { TextField } from 'formik-material-ui';
 import { useHistory } from 'react-router-dom';
 import { DialogContent, TextField as MUITextField } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { FieldArray, Form, Formik, Field } from 'formik';
 import AuthTokenContext from '../features/AuthTokenContext';
-import Box from '@material-ui/core/Box';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -94,7 +88,6 @@ export default function RecipeDetails({ handleClose }) {
                     <Grid item xs={12}>
                         {meal?.description}
                     </Grid>
-                    <Grid item xs={12}></Grid>
                     <Grid item xs={12}>
                         <Button
                             component={Link}
