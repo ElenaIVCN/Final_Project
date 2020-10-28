@@ -15,6 +15,9 @@ import AuthTokenContext from '../features/AuthTokenContext';
 import Box from '@material-ui/core/Box';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const UploadButtons = () => onclick();
 
@@ -42,7 +45,7 @@ export default function RecipeDetails({ handleClose }) {
     const { id } = useParams();
 
     useEffect(() => {
-        fetch('http://younnite.com/api/recipe/' + id)
+        fetch('http://younnite.com/api/recipe/' + id + '?include=ingredients')
             .then((res) => res.json())
             .then(function (data) {
                 console.log(data);
@@ -69,6 +72,21 @@ export default function RecipeDetails({ handleClose }) {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <DialogContentText id="alert-dialog-description">
+                            {meal.ingredients && meal.ingredients.length && (
+                                <List dense={dense}>
+                                    {meal.ingredients.map((ingredient) => (
+                                        <ListItem key={ingredient.id}>
+                                            <ListItemText
+                                                primary={ingredient.name}
+                                            />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            )}
+                        </DialogContentText>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <DialogContentText id="alert-dialog-description">
                             {meal?.short_description}
                         </DialogContentText>
                     </Grid>
@@ -78,24 +96,21 @@ export default function RecipeDetails({ handleClose }) {
                     </Grid>
                     <Grid item xs={12}></Grid>
                     <Grid item xs={12}>
-                        <Link>
-                            <Button
-                                component={Link}
-                                color="primary"
-                                to={'/edit_recipe/' + id}
-                            >
-                                Edit Recipe
-                            </Button>
-                        </Link>
-                        <Link>
-                            <Button
-                                component={Link}
-                                color="primary"
-                                to={'/delete_recipe/' + id}
-                            >
-                                Delete Recipe
-                            </Button>
-                        </Link>
+                        <Button
+                            component={Link}
+                            color="primary"
+                            to={'/edit_recipe/' + id}
+                        >
+                            Edit Recipe
+                        </Button>
+
+                        <Button
+                            component={Link}
+                            color="primary"
+                            to={'/delete_recipe/' + id}
+                        >
+                            Delete Recipe
+                        </Button>
                     </Grid>
                 </Grid>
             </DialogContent>

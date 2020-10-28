@@ -88,7 +88,7 @@ export default function AddRecipePreviewCard({ handleClose }) {
     }, [loading]);
 
     let ingredients = [];
-    if (meal.ingredients && meal.ingredients.length) {
+    if (meal?.ingredients && meal?.ingredients.length) {
         meal.ingredients.map((ingredient) => {
             ingredients.push(ingredient.name);
         });
@@ -111,7 +111,7 @@ export default function AddRecipePreviewCard({ handleClose }) {
                         short_description: '',
                         description: meal?.description,
                         id: meal?.id,
-                        categories: meal.categories || [],
+                        categories: meal?.categories || [],
                     }}
                     onSubmit={async (values, helpers) => {
                         if (!values.id) {

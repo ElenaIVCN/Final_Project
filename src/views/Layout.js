@@ -4,62 +4,7 @@ import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Homepage from './Homepage';
 import { TheContextProvider } from '../features/TheContext';
-import {
-    Fastfood as DinnerIcon,
-    EmojiFoodBeverage as BreakfastIcon,
-    Kitchen as LunchIcon,
-} from '@material-ui/icons';
-
 import { makeStyles } from '@material-ui/core/styles';
-
-const categories = [
-    {
-        url: '/category/breakfast',
-        name: 'Breakfast',
-        icon: <BreakfastIcon />,
-    },
-    {
-        url: '/category/smoothies',
-        name: 'Smoothies',
-        icon: <DinnerIcon />,
-    },
-    {
-        url: '/category/appetizers',
-        name: 'Appetizers',
-        icon: <LunchIcon />,
-    },
-    {
-        url: '/category/brunch',
-        name: 'Brunch',
-        icon: <LunchIcon />,
-    },
-    {
-        url: '/category/lunch',
-        name: 'Lunch',
-        icon: <LunchIcon />,
-    },
-
-    {
-        url: '/category/salads',
-        name: 'Salads',
-        icon: <LunchIcon />,
-    },
-    {
-        url: '/category/soups',
-        name: 'Soups',
-        icon: <LunchIcon />,
-    },
-    {
-        url: '/category/dinner',
-        name: 'Dinner',
-        icon: <LunchIcon />,
-    },
-    {
-        url: '/category/desserts',
-        name: 'Desserts',
-        icon: <LunchIcon />,
-    },
-];
 
 const useStyles = makeStyles((theme) => ({
     toolbar: theme.mixins.toolbar,
@@ -74,10 +19,19 @@ const Layout = withRouter(({ match }) => {
     const history = useHistory();
     const classes = useStyles();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [categories, setCategories] = React.useState([]);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+
+    useEffect(() => {
+        fetch('http://younnite.com/api/categories')
+            .then((res) => res.json())
+            .then(function (data) {
+                setCategories(data.data);
+            });
+    }, []);
 
     return history.location.pathname === '/login' ||
         history.location.pathname === '/signup' ? (
