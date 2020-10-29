@@ -8,7 +8,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import KitchenIcon from '@material-ui/icons/Kitchen';
-import { Link } from 'react-router-dom';
 import { TheContext } from '../features/TheContext';
 
 const drawerWidth = 200;
